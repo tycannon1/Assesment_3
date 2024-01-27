@@ -1,112 +1,115 @@
 console.log("Hello world")
 
-const drinkDisplay = document.querySelector("#drinkDisplay")
-const drinkForm = document.querySelector("form")
+const albumDisplay = document.querySelector("#albumDisplay")
+const AlbumForm = document.querySelector("form")
 
-// Want to create "cards" for each drink from our database
-// Assume that this funciton will be called passing in a drink 
+// Want to create "cards" for each Album from our database
+// Assume that this funciton will be called passing in a Album 
 // object from the database = paramater
-const createDrinkCard = (drinkObj) => {
+const createAlbumCard = (albumObj) => {
     //create a new section element
-    const newDrinkCard = document.createElement("section")
-    //add a class name of drink card
-    newDrinkCard.className = "drinkCard";
-    // add some innner html to newDrinkCard
-    newDrinkCard.innerHTML = `
-    <img src=${drinkObj.picture} />
-    <p>${drinkObj.name}</p>
+    const newAlbumCard = document.createElement("section")
+    //add a class name of Album card
+    newAlbumCard.className = "AlbumCard";
+    // add some innner html to newAlbumCard
+    newAlbumCard.innerHTML = `
+    <img src=${albumObj.picture} />
+    <p>${albumObj.name}</p>
+    <p>${albumObj.artistName}</p>
 
     <section>
-        <button onclick="updateDrink(${drinkObj.id}, 'downvote')">-</button>
-        Popularity: ${drinkObj.votes}
-        <button onclick="updateDrink(${drinkObj.id}, 'upvote')" >+</button>
+        <button onclick="updateAlbum(${albumObj.id}, 'downvote')">-</button>
+        Popularity: ${albumObj.votes}
+        <button onclick="updateAlbum(${albumObj.id}, 'upvote')" >+</button>
       </section>
 
 
     <br/>
 
-    <button onclick="deleteDrink(${drinkObj.id})">Delete Me</button>
+    <button onclick="deleteAlbum(${albumObj.id})">Delete Me</button>
     `;
 
-    drinkDisplay.appendChild(newDrinkCard);
+    albumDisplay.appendChild(newAlbumCard);
 }
 
-//Create a function that takes in an array of drink 
+//Create a function that takes in an array of Album 
 //objects four (our database array), and invokes 
-//createDrinks at each object in the array
+//createAlbums at each object in the array
 
-const displayAllDrinks = (drinkArr) => { 
-    for (let i = 0; i < drinkArr.length; i++)
-    // at each iteration, create a new drink card passing in the drink object
-    createDrinkCard(drinkArr[i])
+const displayAllAlbums = (AlbumArr) => { 
+    for (let i = 0; i < AlbumArr.length; i++)
+    // at each iteration, create a new Album card passing in the Album object
+    createAlbumCard(AlbumArr[i])
 
 }
 
 // create a function to make a call to our server
-// to retrieve the drink array
+// to retrieve the Album array
 
-const getAllDrinks = () => {
+const getAllAlbums = () => {
     axios
-        .get("/drinks")
+        .get("/Albums")
         .then((res) => {
-            displayAllDrinks(res.data.allDrinks);
+            displayAllAlbums(res.data.allAlbums);
         })
 }
 
 const handleSubmit = (evt) => {
     evt.preventDefault();
-    let name = document.getElementById("drinkName")
-    let drinkImg = document.getElementById("drinkImg")
+    let name = document.getElementById("albumName")
+    let nameArtist = document.getElementById("albumArtist")
+    let albumImg = document.getElementById("albumImg")
 
     let bodyObj = {
-        drinkName: name.value,
-        drinkPic: drinkImg.value
+        albumName: name.value,
+        albumArtist: nameArtist.value,
+        AlbumPic: albumImg.value
 
     }
 
-    drinkDisplay.innerHTML = "";
+    albumDisplay.innerHTML = "";
     name.value = "";
-    drinkImg.value = "";
+    albumImg.value = "";
 
-    axios.post("/addDrink", bodyObj)
+    axios.post("/addAlbum", bodyObj)
     .then((res) => {
-        displayAllDrinks(res.data.allDrinks)
+        displayAllAlbums(res.data.allAlbums)
     })
 }
 
-// function to delete a drink
-const deleteDrink = (id) => {
+// function to delete a Album
+const deleteAlbum = (id) => {
 
     //Send an anxious delete request 
 
     axios
-    .delete(`/deleteDrink/${id}`)
+    .delete(`/deleteAlbum/${id}`)
     .then((res) => {
-        //clear drink display div and repopulate by calling all drinks
-        drinkDisplay.innerHTML = ""
-        displayAllDrinks(res.data.allDrinks)
+        //clear Album display div and repopulate by calling all Albums
+        albumDisplay.innerHTML = ""
+        displayAllAlbums(res.data.allAlbums)
     });
 }
 
-//Function to update the popularity votes of a drink, this function
-//should accept both the drinks id and whether we are upvoting or downvoting
-const updateDrink = (id, type) => {
+//Function to update the popularity votes of a Album, this function
+//should accept both the Albums id and whether we are upvoting or downvoting
+const updateAlbum = (id, type) => {
     let bodyObj = {
         voteType: type
     }
     console.log(bodyObj)
 
-    // send a put request providing the body obj and param for the drinks id
+    // send a put request providing the body obj and param for the Albums id
     axios
-        .put(`/updateDrink/${id}`, bodyObj)
+        .put(`/updateAlbum/${id}`, bodyObj)
         .then((res) => {
-            drinkDisplay.innerHTML = "";
-            displayAllDrinks(res.data.allDrinks)
+            albumDisplay.innerHTML = "";
+            displayAllAlbums(res.data.allAlbums)
         })
 }
 
-//add event listener to the drinkForm to fire a function (handleSubmit) when submitted
-drinkForm.addEventListener('submit',
+//add event listener to the AlbumForm to fire a function (handleSubmit) when submitted
+AlbumForm.addEventListener('submit',
 handleSubmit)
 
-getAllDrinks();
+getAllAlbums();

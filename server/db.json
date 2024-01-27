@@ -1,20 +1,23 @@
 [
     {
         "id": 1,
-        "name": "Vanilla Coke",
-        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiXnNmIsz7RSLJIqBatdRosuERkyzKy0e-Kg&usqp=CAU",
+        "name": "Views",
+        "artistName": "Drake",
+        "picture": "https://upload.wikimedia.org/wikipedia/en/a/af/Drake_-_Views_cover.jpg",
         "votes": 0
     },
     {
         "id": 2,
-        "name": "Dr Pepper",
-        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrNOB8XuhOZRYsR9ed2T9StxnUSlXSawSssQ&usqp=CAU",
+        "name": "The 1975",
+        "artistName": "The 1975",
+        "picture": "https://upload.wikimedia.org/wikipedia/en/0/03/The_1975_%28album%29_by_The_1975.png",
         "votes": 0
     },
     {
         "id": 3,
-        "name": "Sparkling Water",
-        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEXD1BCrfd5zPPHRnv3NjQ0whUwxubKGfqzA&usqp=CAU",
+        "name": "Born To Die",
+        "artistName": "Lana Del Rey",
+        "picture": "https://upload.wikimedia.org/wikipedia/en/2/29/BornToDieAlbumCover.png",
         "votes": 0
     }
 ]

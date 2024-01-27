@@ -27,10 +27,10 @@ import handlerFunctions from "./controller.js"
 //ROUTES
 
 app.get("/hello", handlerFunctions.sayHello)
-app.get("/drinks", handlerFunctions.getAllDrinks);
-app.post("/addDrink", handlerFunctions.addDrink);
-app.delete("/deleteDrink/:id", handlerFunctions.deleteDrink);
-app.put("/updateDrink/:id", handlerFunctions.updateDrink)
+app.get("/Albums", handlerFunctions.getAllAlbums);
+app.post("/addAlbum", handlerFunctions.addAlbum);
+app.delete("/deleteAlbum/:id", handlerFunctions.deleteAlbum);
+app.put("/updateAlbum/:id", handlerFunctions.updateAlbum)
 
 
 //start up the server

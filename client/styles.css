@@ -5,7 +5,7 @@ body {
     text-align: center;
   }
   
-  .drink-card {
+  .Album-card {
     border: solid 1px black;
     display: flex;
     flex-direction: column;
@@ -14,7 +14,7 @@ body {
     width: 25%;
   }
   
-  #drinkDisplay {
+  #albumDisplay {
     width: 80vw;
     display: flex;
     justify-content: space-evenly;

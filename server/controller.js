@@ -1,4 +1,4 @@
-import drinks from './db.json' assert { type: 'json'}
+import Albums from './db.json' assert { type: 'json'}
 
 let globalId = 4;
 
@@ -9,82 +9,84 @@ const handlerFunctions = {
         })
 },
 
-getAllDrinks: (req, res) => {
+getAllAlbums: (req, res) => {
     res.send({
-        message: "Here are the drinks",
-        allDrinks: drinks
+        message: "Here are the Albums",
+        allAlbums: Albums
     })
 },
 
-addDrink: (req, res) => {
-    //Create a new drink object, passing in the values from the req object
-    //add that new drink to our drink array (drinks)
-    const drinkName = req.body.drinkName
-    const drinkPic = req.body.drinkPic
+addAlbum: (req, res) => {
+    //Create a new Album object, passing in the values from the req object
+    //add that new Album to our Album array (Albums)
+    const albumName = req.body.albumName
+    const albumArtist = req.body.albumArtist
+    const AlbumPic = req.body.AlbumPic
 
-    const newDrink = {
+    const newAlbum = {
         id: globalId,
-        picture: drinkPic,
-        name: drinkName,
+        picture: AlbumPic,
+        name: albumName,
+        name: albumArtist,
         votes: 0,
 
     };
 
-    drinks.push(newDrink)
+    Albums.push(newAlbum)
 
     globalId++
 
     res.send({
-        message: "Drink added successfully",
-        allDrinks: drinks,
+        message: "Album added successfully",
+        allAlbums: Albums,
     })
 },
 
-deleteDrink: (req, res) => {
-    const drinkId = req.params.id;
+deleteAlbum: (req, res) => {
+    const AlbumId = req.params.id;
 
-//find the drink objects with the matching id from our drinks array 
-//then remove it from the drinks array
+//find the Album objects with the matching id from our Albums array 
+//then remove it from the Albums array
 
-    for (let i = 0; i < drinks.length; i++) {
-        //iterate through drinks, if a drink's id 
+    for (let i = 0; i < Albums.length; i++) {
+        //iterate through Albums, if a Album's id 
         //is a match, then we will delete with a splice
-        if (drinks[i].id === +drinkId) {
+        if (Albums[i].id === +AlbumId) {
             // +"5" === Number("5")
-            drinks.splice(i, 1)
+            Albums.splice(i, 1)
             break
         }
     }
     
     res.send({
-        message: "Drink deleted",
-        allDrinks: drinks,
+        message: "Album deleted",
+        allAlbums: Albums,
     })
 },
 
-updateDrink: (req, res) => {
+updateAlbum: (req, res) => {
     //grab the id from re.params
-const drinkId = req.params.id;
+const AlbumId = req.params.id;
 
 const voteType = req.body.voteType;
 
-const drinkIdx = drinks.findIndex((drink) => {
-    return drink.id === +drinkId
+const AlbumIdx = Albums.findIndex((Album) => {
+    return Album.id === +AlbumId
 })
 
 console.log("Got here")
-//based on vote type increment or decrement the drinks.votes roperty
+//based on vote type increment or decrement the Albums.votes roperty
 
 if (voteType === "upvote") {
-    drinks[drinkIdx].votes += 1
+    Albums[AlbumIdx].votes += 1
 
 } else if (voteType === "downvote") {
-    drinks[drinkIdx].votes -= 1
+    Albums[AlbumIdx].votes -= 1
 }
 
 res.send ({
     message: "Vote Count Updated",
-    allDrinks: drinks
+    allAlbums: Albums
 })
 
 }, 
