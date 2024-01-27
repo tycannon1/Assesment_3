@@ -1,0 +1,27 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .drink-card {
+    border: solid 1px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px;
+    width: 25%;
+  }
+  
+  #drinkDisplay {
+    width: 80vw;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  
+  img {
+    min-height: 100px;
+    min-width: 200px;
+  }
